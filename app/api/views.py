@@ -21,3 +21,11 @@ class PostUpdateView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+
+
+class PostDeleteView(APIView):
+    def delete(self, request, *args, **kwargs):
+        object = Posts.objects.filter(id=self.kwargs['pk']).first()
+        object_id = {'delete post pk': object.id}
+        object.delete()
+        return Response(object_id, status=204)
