@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Create Post{% endblock %}
+{% block content %}
+<h1>Post Create</h1>
+<div class="form">
+    <form action="{% url 'post_create' %}" method="post" enctype="multipart/form-data">
+        {% include 'partials/form.html' with button_text="Create" %}
+    </form>
+</div>
+{% endblock %}

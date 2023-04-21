@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}User List{% endblock %}
+{% block content %}
+{% for account in accounts %}
+<div class="accounts">
+    <p><a href="{% url 'post_detail' account.pk %}"><img src="{{ account.avatar.url. }}" alt="{{ account.username }} avatar"></a></p>
+    <p><a href="{% url 'post_detail' account.pk %}">{{ account.username }}</a></p>
+</div>
+{% endfor %}
+<div class="bottom_indent"></div>
+{% endblock %}

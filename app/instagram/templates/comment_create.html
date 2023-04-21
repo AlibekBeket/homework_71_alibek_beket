@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Create Comment{% endblock %}
+{% block content %}
+<h1>Comment Create</h1>
+<div class="form">
+    <form action="{% url 'comment_add' post_pk%}" method="post">
+        {% include 'partials/form.html' with button_text="Create" %}
+    </form>
+</div>
+{% endblock %}
