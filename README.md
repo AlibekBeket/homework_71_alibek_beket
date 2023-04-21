@@ -37,9 +37,7 @@ $ ./manage.py loaddata dump.json
 $ ./manage.py runserver
 ```
 ### Детальный просмотр проекта или задачи через api
-Путь url = api/issue_detail/<int:pk> (задача) или api/posts/
-
-pk - это ключ объекта
+Путь url = api/posts/
 
 Метод GET
 
@@ -55,7 +53,7 @@ pk - это ключ объекта
 }
 ]
 ```
-Путь url = api/issue_detail/<int:pk> (задача) или api/posts/<int:pk>/
+Путь url = api/posts/<int:pk>/
 
 pk - это ключ объекта
 
