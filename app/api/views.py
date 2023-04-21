@@ -29,3 +29,21 @@ class PostDeleteView(APIView):
         object_id = {'delete post pk': object.id}
         object.delete()
         return Response(object_id, status=204)
+
+class LikeUpdateView(APIView):
+    def get(self, request, *args, **kwargs):
+        object = Posts.objects.filter(id=self.kwargs['pk']).first()
+        user = request.user
+        if object in user.liked_posts.all():
+            user.liked_posts.remove(Posts.objects.get(id=self.kwargs['pk']))
+            object.likes -= 1
+            object.save()
+            user.save()
+            post_liked = {'like': 'removed like'}
+        else:
+            user.liked_posts.add(Posts.objects.get(id=self.kwargs['pk']))
+            object.likes += 1
+            object.save()
+            user.save()
+            post_liked = {'like': 'put like'}
+        return Response(post_liked, status=204)
