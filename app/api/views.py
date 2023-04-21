@@ -30,6 +30,7 @@ class PostDeleteView(APIView):
         object.delete()
         return Response(object_id, status=204)
 
+
 class LikeUpdateView(APIView):
     def get(self, request, *args, **kwargs):
         object = Posts.objects.filter(id=self.kwargs['pk']).first()
