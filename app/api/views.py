@@ -1,11 +1,16 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
+from rest_framework.permissions import BasePermission
 from instagram.models import Posts
 from rest_framework.response import Response
 from api.serializers import PostsSerializer
 
 
 # Create your views here.
+
+class IsUser(BasePermission):
+    def has_permission(self, request, view):
+        return request.user
 
 
 class PostsView(ModelViewSet):
@@ -14,6 +19,8 @@ class PostsView(ModelViewSet):
 
 
 class PostUpdateView(APIView):
+    permission_class = [IsUser]
+
     def put(self, request, *args, **kwargs):
         object = Posts.objects.filter(id=self.kwargs['pk']).first()
         serializer = PostsSerializer(object, data=request.data)
@@ -24,6 +31,8 @@ class PostUpdateView(APIView):
 
 
 class PostDeleteView(APIView):
+    permission_class = [IsUser]
+
     def delete(self, request, *args, **kwargs):
         object = Posts.objects.filter(id=self.kwargs['pk']).first()
         object_id = {'delete post pk': object.id}
@@ -32,6 +41,8 @@ class PostDeleteView(APIView):
 
 
 class LikeUpdateView(APIView):
+    permission_class = [IsUser]
+
     def get(self, request, *args, **kwargs):
         object = Posts.objects.filter(id=self.kwargs['pk']).first()
         user = request.user
